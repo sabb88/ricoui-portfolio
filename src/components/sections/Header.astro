@@ -1,5 +1,5 @@
 ---
-import { Mail, Moon, SunMedium,Download } from "@lucide/astro";
+import { Mail, Moon, SunMedium, MessageCircle } from "@lucide/astro";
 import menus from "@/collections/menu.json";
 import Button from "@/components/ui/Button.astro";
 import Logo from "@/components/ui/Logo.astro";
@@ -32,7 +32,7 @@ import Logo from "@/components/ui/Logo.astro";
         <!-- Dark Mode Toggle (Mobile) -->
         <div
           id="darkToggleMobile"
-          class="flex items-center justify-center w-10 h-10 cursor-pointer rounded-full bg-gradient-to-b from-white to-[#edeefa] border-[0.5px] border-[#f3f3ff] dark:from-neutral-800 dark:to-neutral-600 dark:border-neutral-600 transition-transform duration-200 active:scale-95"
+          class="flex items-center justify-center w-10 h-10 cursor-pointer rounded-full bg-gradient-to-b from-white to-[#edeefa] border-[0.5px] border-[#f3f3ff] dark:from-neutral-800 dark:to-neutral-6[...]
         >
           <div
             class="flex justify-center items-center w-6 h-6 relative overflow-hidden rounded-full bg-[#7fa1ff]  bg-gradient-to-b from-[#85a6ff] to-[#2d6dc3] border-[0.5px] border-[#7fa1ff]"
@@ -81,7 +81,7 @@ import Logo from "@/components/ui/Logo.astro";
       <!-- Menu Items -->
       <div
         id="menu"
-        class="fixed top-[68px] sm:top-0 left-3 right-3 sm:left-0 sm:right-0 ease-out duration-300 z-40 flex-col items-center justify-start hidden w-auto h-auto text-sm pt-6 pb-5 sm:py-0 sm:relative sm:flex-row sm:flex"
+        class="fixed top-[68px] sm:top-0 left-3 right-3 sm:left-0 sm:right-0 ease-out duration-300 z-40 flex-col items-center justify-start hidden w-auto h-auto text-sm pt-6 pb-5 sm:py-0 sm:relative s[...]
       >
         <!-- Mobile Menu Background -->
         <div
@@ -100,7 +100,7 @@ import Logo from "@/components/ui/Logo.astro";
               return (
                 <a
                   href={menu.url}
-                  class="relative flex items-center justify-center w-full sm:w-auto px-5 py-2.5 sm:py-2 sm:px-3 md:px-4 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounded-none text-neutral-700 dark:text-neutral-200   hover:text-primary sm:hover:bg-transparent dark:hover:text-white dark:hover:bg-neutral-800/50 sm:dark:hover:bg-transparent active:scale-[0.98] sm:active:scale-100 transition-all"
+                  class="relative flex items-center justify-center w-full sm:w-auto px-5 py-2.5 sm:py-2 sm:px-3 md:px-4 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounde[...]
                 >
                   {menu.name}
                 </a>
@@ -111,25 +111,29 @@ import Logo from "@/components/ui/Logo.astro";
 
         <!-- Contact Button (Mobile) -->
         <div class="relative z-10 w-full px-5 mt-3 sm:hidden">
-          <Button url="javascript:void(0);" type="fill" className="m-auto w-full justify-center ">
-            Resume <Download size={16} />
-          </Button>
+          <button id="getInTouchMobile" type="button" class="m-auto w-full justify-center">
+            <span class="flex items-center justify-center gap-2">
+              Get in touch <MessageCircle size={16} />
+            </span>
+          </button>
         </div>
       </div>
 
       <!-- Desktop Actions -->
       <div class="relative hidden sm:flex items-center gap-2 ml-4 lg:ml-6">
         <!-- Contact Button (Desktop) -->
-        <Button url="javascript:void(0);" type="fill" className="md:flex mx-1">
-          Resume <Download size={16} />
-        </Button>
+        <button id="getInTouchDesktop" type="button" class="md:flex mx-1">
+          <span class="flex items-center justify-center gap-2">
+            Get in touch <MessageCircle size={16} />
+          </span>
+        </button>
 
         <span class="separator-line  hidden sm:inline-block bg-[rgba(183,202,255,0.5)] mt-[20px] -translate-y-1/2 w-px h-[20px]"></span>
 
         <!-- Dark Mode Toggle (Desktop) -->
         <div
           id="darkToggle"
-          class="relative flex items-center h-9 px-2 gap-1.5 font-medium cursor-pointer rounded-full bg-gradient-to-b from-white to-[#edf1fa] border-[0.5px] border-[#f3f5ff] dark:from-neutral-800 dark:to-neutral-600 dark:border-neutral-600 transition-all duration-200 hover:shadow-md hover:scale-105 active:scale-95 mx-1"
+          class="relative flex items-center h-9 px-2 gap-1.5 font-medium cursor-pointer rounded-full bg-gradient-to-b from-white to-[#edf1fa] border-[0.5px] border-[#f3f5ff] dark:from-neutral-800 dark[...]
         >
           <div
             class="flex justify-center items-center flex-shrink-0 w-6 h-6 relative overflow-hidden rounded-full bg-gradient-to-b from-[#85a6ff] to-[#2d6dc3] border-[0.5px] border-[#7fa1ff]"
@@ -295,8 +299,35 @@ import Logo from "@/components/ui/Logo.astro";
   declare global {
     interface Window {
       closeMobileMenu: () => void;
+      handleGetInTouch: () => void;
     }
   }
+
+  // Handle "Get in touch" button click
+  function handleGetInTouch() {
+    console.log('Get in touch clicked!');
+    // Add your desired action here:
+    // Option 1: Scroll to contact section
+    // const contactSection = document.getElementById('contact');
+    // contactSection?.scrollIntoView({ behavior: 'smooth' });
+    
+    // Option 2: Open email
+    // window.location.href = 'mailto:your-email@example.com';
+    
+    // Option 3: Navigate to contact page
+    window.location.href = '/contact';
+    
+    // Option 4: Open a modal (if you have one)
+    // const modal = document.getElementById('contactModal');
+    // modal?.showModal();
+  }
+
+  // Attach event listeners to both buttons
+  const getInTouchDesktop = document.getElementById('getInTouchDesktop');
+  const getInTouchMobile = document.getElementById('getInTouchMobile');
+
+  getInTouchDesktop?.addEventListener('click', handleGetInTouch);
+  getInTouchMobile?.addEventListener('click', handleGetInTouch);
 
   // Sync dark mode toggle between mobile and desktop
   const darkToggle = document.getElementById('darkToggle');
@@ -394,4 +425,5 @@ import Logo from "@/components/ui/Logo.astro";
 
   // Add to global scope so inline events can call it
   window.closeMobileMenu = closeMobileMenu;
+  window.handleGetInTouch = handleGetInTouch;
 </script>
