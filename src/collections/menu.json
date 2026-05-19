@@ -4,15 +4,11 @@
 		"url": "/"
 	},
 	{
-		"name": "Writing",
-		"url": "/blog"
+		"name": "Portfolio",
+		"url": "/portfolio"
 	},
 	{
-		"name": "Works",
-		"url": "/works"
-	},
-	{
-		"name": "About",
-		"url": "/about"
+		"name": "Contact",
+		"url": "/contact"
 	}
 ]
